@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.parseInt(br.readLine());
+        int sum = 0;
+        int answer1;
+        int answer2;
+        int i = 1;
+
+        while(true) {
+            if(sum + i >= n) {
+                if(i%2 == 0) {
+                    answer1 = n - sum;
+                    answer2 = i-(n - sum - 1);
+                } else {
+                    answer1 = i - (n - sum - 1);
+                    answer2 = n - sum;
+                }
+                break;
+            }
+            else
+                sum += i++;
+        }
+
+        bw.write(answer1+"/"+answer2);
+        bw.flush();
+    }
+}
