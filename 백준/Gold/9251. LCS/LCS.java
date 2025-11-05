@@ -10,6 +10,8 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
+    “현재 문자가 같으면 이전까지의 최장 공통 부분 수열에 1을 더한 게 최선이고,
+    다르면 둘 중 더 긴 이전 값 중 하나를 그대로 이어받으면 된다.”
     static List<List<int[]>> graph = new ArrayList<>();
     static int[] dijkstra;
 
@@ -42,3 +44,4 @@ public class Main {
 
     }
 }
+
