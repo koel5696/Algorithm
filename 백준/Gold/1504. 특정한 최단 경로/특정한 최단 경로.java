@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -10,6 +9,9 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
+    // 1부터 시작하여 v1, v2라는 2가지 정점을 반드시 거치고 마지막 정점 최소거리로 도달.
+    // Math.min(1~v1~v2~n, 1~v2~v1~n)으로 구하는 것이 핵심 아이디어.
+    // v1, v2, n 각 3개의 경우에 하나라도 도달하지 못하는 경우가 생긴다면 -1 출력.
     static List<List<int[]>> graph = new ArrayList<>();
     static int[] dijkstra;
 
