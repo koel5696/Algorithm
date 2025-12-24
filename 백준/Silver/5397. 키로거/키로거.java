@@ -3,9 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -15,32 +13,40 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < n; i++) {
-            LinkedList<Character> password = new LinkedList<>();
-            char[] input = br.readLine().toCharArray();
-            int index = 0;
-            for (char value : input) {
-                if (value == '<') {
-                    if (index > 0) {
-                        index--;
+            String input = br.readLine();
+            Stack<Character> leftSt = new Stack<>();
+            Stack<Character> rightSt = new Stack<>();
+            
+            for (char c : input.toCharArray()) {
+                if (c == '<') {
+                    if (!leftSt.isEmpty()) {
+                        rightSt.push(leftSt.pop());
                     }
-                } else if (value == '>') {
-                    if (index < password.size()) {
-                        index++;
+                } else if (c == '>') {
+                    if (!rightSt.isEmpty()) {
+                        leftSt.push(rightSt.pop());
                     }
-                } else if (value == '-') {
-                    if (index > 0) {
-                        password.remove(--index);
+                } else if (c == '-') {
+                    if (!leftSt.isEmpty()) {
+                        leftSt.pop();
                     }
                 } else {
-                    password.add(index, value);
-                    index++;
+                    leftSt.push(c);
                 }
             }
-            String result = password.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining());
-            bw.write(result + "\n");
-            bw.flush();
+            
+            StringBuilder sb = new StringBuilder();
+            for (char c : leftSt) {
+                sb.append(c);
+            }
+            while (!rightSt.isEmpty()) {
+                sb.append(rightSt.pop());
+            }
+
+            bw.write(sb.toString());
+            bw.write("\n");
         }
+        bw.flush();
+        bw.close();
     }
 }
