@@ -10,7 +10,6 @@ public class Main {
     static int[] y = {0, 0, -1, 1};
     static int[][] graph;
     static int[][] dp;
-    static boolean[][] visited;
     static int n;
     static int max;
 
@@ -21,17 +20,11 @@ public class Main {
         n = Integer.parseInt(br.readLine());
         graph = new int[n + 1][n + 1];
         dp = new int[n + 1][n + 1];
-        visited = new boolean[n + 1][n + 1];
 
         for (int i = 1; i <= n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             for (int j = 1; j <= n; j++) {
                 graph[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                dp[i][j] = 1;
             }
         }
 
@@ -51,7 +44,7 @@ public class Main {
             int ny = y[i] + currY;
             if ((nx > 0 && ny > 0) && (nx <= n && ny <= n)) {
                 if (graph[nx][ny] > graph[currX][currY]) {
-                    if (dp[nx][ny] > 1) {
+                    if (dp[nx][ny] > 0) {
                         result = Math.max(result, dp[nx][ny] + 1);
                         continue;
                     }
