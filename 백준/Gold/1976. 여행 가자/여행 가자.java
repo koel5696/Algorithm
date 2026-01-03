@@ -36,9 +36,9 @@ public class Main {
             }
         }
 
-        for (int i = 1; i <= n; i++) {
-            s[i] = find(s[i]);
-        }
+      /*  for (int i = 1; i <= n; i++) {
+            s[i] = find(s[i]); // 기준이 없이 합친다면 꼬임. 최종적으로 부모가 어디인지 업데이트할 필요가있음!!
+        }*/
 
         List<Integer> num = new ArrayList<>();
         st = new StringTokenizer(br.readLine(), " ");
@@ -46,9 +46,9 @@ public class Main {
             num.add(Integer.parseInt(st.nextToken()));
         }
 
-        int parent = s[num.get(0)];
+        int parent = find(s[num.get(0)]);
         for (int i = 1; i < num.size(); i++) {
-            if (parent != s[num.get(i)]) {
+            if (parent != find(s[num.get(i)])) { // 여기서 확인 가능
                 bw.write("NO");
                 bw.flush();
                 return;
