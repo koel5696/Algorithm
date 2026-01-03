@@ -27,18 +27,17 @@ public class Main {
             for (int j = 1; j <= n; j++) {
                 int judge = Integer.parseInt(st.nextToken());
                 if (judge == 1) {
-                    int parent1 = find(i);
-                    int parent2 = find(j);
+                    int parent1 = find(j);
+                    int parent2 = find(i);
                     if (parent1 != parent2) {
-                        if (parent1 > parent2) {
-                            s[parent1] = parent2;
-                        } else {
-                            s[parent2] = parent1;
-                        }
-
+                        s[parent2] = parent1;
                     }
                 }
             }
+        }
+
+        for (int i = 1; i <= n; i++) {
+            s[i] = find(s[i]);
         }
 
         List<Integer> num = new ArrayList<>();
