@@ -20,4 +20,3 @@ where review.reviewCount = (
     from memberCount2
 )
 order by REVIEW_DATE, review.REVIEW_TEXT
-
