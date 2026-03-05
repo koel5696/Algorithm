@@ -6,25 +6,47 @@ import java.io.OutputStreamWriter;
 import java.util.*;
 
 public class Main {
+    static List<List<int[]>> list = new ArrayList<>();
+    static int[] dijkstra;
+    static int[] items;
+    /*static int[] x = {-1, 1, 0 ,0};
+    static int[] y = {0, 0, -1 ,1};
+    static int[][] arr;
+    static int inputX;
+    static int inputY;
+    static boolean[][] visited;*/
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
 
         for(int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
+            pq.add(Integer.parseInt(br.readLine()));
         }
-        Arrays.sort(arr);
 
+        int curr1 = pq.poll();
+        int curr2 = pq.poll();
+        int curr3 = pq.poll();
         int result = 0;
-        for(int i = n-1; i > 1; i--) {
-            if(arr[i-1] + arr[i-2] > arr[i]) {
-                result = arr[i] + arr[i-1] + arr[i-2];
-                break;
+
+        if(curr1 < curr2 + curr3) {
+            result = curr1 + curr2 + curr3;
+        } else {
+            while(!pq.isEmpty()) {
+                curr1 = curr2;
+                curr2 = curr3;
+                curr3 = pq.poll();
+                if (curr1 < curr2 + curr3) {
+                    result = curr1 + curr2 + curr3;
+                    break;
+                }
             }
         }
+
         result = (result == 0) ? -1 : result;
         bw.write(result + "");
         bw.flush();
