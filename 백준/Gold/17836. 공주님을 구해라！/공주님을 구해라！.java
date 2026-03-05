@@ -49,15 +49,16 @@ public class Main {
         queue.add(new int[]{0, 0, 0});
         while(!queue.isEmpty()) {
             int[] curr = queue.poll();
+            if(curr[1] == inputX-1 && curr[0] == inputY-1) {
+                result = curr[2];
+                break;
+            }
+            
             for (int i = 0; i < 4; i++) {
                 int nx = x[i] + curr[1];
                 int ny = y[i] + curr[0];
                 if(nx >= 0 && nx < inputX && ny >= 0 && ny < inputY
                         && !visited[ny][nx] && arr[ny][nx] != 1) {
-                    if(nx == inputX-1 && ny == inputY-1) {
-                        result = curr[2] + 1;
-                        break;
-                    }
                     if(arr[ny][nx] == 2) {
                         sword = (curr[2] + 1) + (inputX - 1 - nx) + (inputY - 1 - ny);
                     }
