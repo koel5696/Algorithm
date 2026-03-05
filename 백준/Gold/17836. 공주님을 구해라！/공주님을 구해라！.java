@@ -33,22 +33,9 @@ public class Main {
         }
 
         visited[0][0] = true;
-        int result1 = dfs();
+        int answer = dfs();
 
-        visited = new boolean[inputY][inputX];
-        visited[0][0] = true;
-        int result2 = dfs2();
-        int answer;
-        if(result1 == 0 && result2 == 0) {
-            answer = 0;
-        } else if(result1 == 0) {
-            answer = result2;
-        } else if(result2 == 0)
-            answer = result1;
-        else
-           answer = Math.min(result1, result2);
-
-        if(answer == 0 || answer > time) {
+        if(answer == Integer.MAX_VALUE || answer > time) {
             bw.write("Fail");
         } else
             bw.write(answer + "");
@@ -56,9 +43,10 @@ public class Main {
     }
 
     public static int dfs() {
+        int sword = Integer.MAX_VALUE;
+        int result = Integer.MAX_VALUE;
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{0, 0, 0});
-        int result = 0;
         while(!queue.isEmpty()) {
             int[] curr = queue.poll();
             for (int i = 0; i < 4; i++) {
@@ -70,50 +58,14 @@ public class Main {
                         result = curr[2] + 1;
                         break;
                     }
+                    if(arr[ny][nx] == 2) {
+                        sword = (curr[2] + 1) + (inputX - 1 - nx) + (inputY - 1 - ny);
+                    }
                     visited[ny][nx] = true;
                     queue.add(new int[]{ny, nx, curr[2] + 1});
                 }
             }
         }
-        return result;
+        return Math.min(sword, result);
     }
-
-    public static int dfs2() {
-        boolean wall = true;
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{0, 0, 0});
-        int result = 0;
-
-        while(!queue.isEmpty()) {
-            int[] curr = queue.poll();
-            for (int i = 0; i < 4; i++) {
-                int nx = x[i] + curr[1];
-                int ny = y[i] + curr[0];
-                if(nx >= 0 && nx < inputX && ny >= 0 && ny < inputY
-                        && !visited[ny][nx]) {
-                    if(arr[ny][nx] == 0 && wall) {
-                        visited[ny][nx] = true;
-                        queue.add(new int[]{ny, nx, curr[2] + 1});
-                    } else if(arr[ny][nx] == 2 && wall) {
-                        queue.clear();
-                        wall = false;
-                        visited = new boolean[inputY][inputX];
-                        visited[ny][nx] = true;
-                        queue.add(new int[]{ny, nx, curr[2] + 1});
-                        break;
-                    }
-                    if(!wall) {
-                        visited[ny][nx] = true;
-                        queue.add(new int[]{ny, nx, curr[2] + 1});
-                    }
-                    if(nx == inputX-1 && ny == inputY-1) {
-                        result = curr[2] + 1;
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
 }
