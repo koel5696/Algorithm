@@ -11,9 +11,9 @@ class Solution {
         
         Arrays.sort(result, (a, b) -> (a+b).compareTo(b+a));
        
-         if(result[result.length - 1].equals("0")) {
+        if(result[result.length - 1].equals("0")) {
             return "0";
-        }
+         }
         
         for(int i = result.length - 1; i >= 0; i--) {
             answer += result[i];
