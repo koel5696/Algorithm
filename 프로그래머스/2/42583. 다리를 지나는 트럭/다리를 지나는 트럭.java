@@ -1,5 +1,10 @@
 import java.util.*;
 class Solution {
+    // 일단 풀긴 했는데 제대로 된 큐 활용을 통한 사고를 다시 해볼 필요 있음!
+    // 일단 풀긴 했는데 제대로 된 큐 활용을 통한 사고를 다시 해볼 필요 있음!
+    // 일단 풀긴 했는데 제대로 된 큐 활용을 통한 사고를 다시 해볼 필요 있음!
+    // 일단 풀긴 했는데 제대로 된 큐 활용을 통한 사고를 다시 해볼 필요 있음!
+    // 일단 풀긴 했는데 제대로 된 큐 활용을 통한 사고를 다시 해볼 필요 있음!
     public int solution(int bridge_length, int weight, int[] truck_weights) {
         LinkedList<int[]> queue = new LinkedList<>();
         Deque<Integer> trucks = new LinkedList<>();
